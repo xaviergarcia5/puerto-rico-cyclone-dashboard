@@ -1,0 +1,83 @@
+PANEL DE CICLONES — COPIA BILINGÜE
+Preparado el 8 de octubre de 2026.
+
+Esta carpeta es una copia independiente del panel original. No se ha publicado
+en Cloudflare ni se ha modificado WordPress.
+
+ABRIR Y REVISAR
+Abre index.html. El evento inicial es Irma 2017, tanto en español como en inglés.
+El idioma inicial es español. El selector permanece en la
+esquina superior derecha y permite escoger Español o English. Los tres botones
+del mapa aparecen debajo de la línea «Hasta…», manteniendo su posición horizontal.
+Su orden es −, +, ↺: alejar, acercar y restablecer, de izquierda a derecha.
+Se retiró la flecha de norte del mapa de lluvia derecho. La flecha y la escala
+del panel satelital izquierdo se conservan; no cambian tamaños ni posiciones.
+Cambiar de idioma conserva el evento, el fotograma,
+la reproducción, la velocidad, el zoom y la visibilidad de la trayectoria.
+Los datos meteorológicos, las estaciones, las unidades y las imágenes no cambian.
+Los nombres propios y los nombres oficiales de estaciones se mantienen.
+En inglés, la longitud oeste se identifica con W; en español, con O.
+El encabezado del catálogo dice «Estación USGS y municipio», sin «real»;
+en inglés, «USGS station and municipality».
+
+Los catálogos enlazados desde la información abren en el idioma seleccionado.
+La dirección index.html?lang=en permite abrir explícitamente en inglés.
+Sin ese parámetro se abre siempre en español; no se usa detección automática
+del idioma del navegador ni se guarda una preferencia en el equipo.
+
+TEXTOS
+i18n.js: controles, fechas y textos dinámicos de la interfaz.
+notes.en.js: versión inglesa de las 13 páginas de información y sus enlaces.
+index.html: textos en español, con los ajustes de organización solicitados:
+Río Icacos integrado al párrafo anterior e instrucciones USGS junto a la primera
+mención del catálogo y del inventario. El texto de María se sustituyó por los dos
+párrafos proporcionados por el usuario. El bloque general de fuentes se dividió
+antes de «La ubicación…». notes.en.js y METODOLOGIA_Y_FUENTES.txt mantienen los
+mismos ajustes. No se modificó el resto del contenido.
+catalogue.en.js: traducciones de los dos catálogos enlazados por el panel.
+language.css: selector y desplazamiento de 38 px a la izquierda de los tres
+botones del mapa, ahora debajo del periodo de lluvia, sin mover el idioma.
+Los controles flotan al inicio del área del mapa, sin añadir filas ni restarle
+espacio al mapa o a la animación. Se mantiene el ancho original de los controles
+en el encabezado. No cambia tamaños, tipografía ni márgenes del panel original.
+Se retiró la franja superior de 44 px y
+los ajustes añadidos al título y las coordenadas en pantallas pequeñas.
+viewer.css: en escritorio, el panel se ajusta a la altura de la ventana.
+Desde 1200 px de ancho de ventana, los controles de reproducción y la barra
+temporal ocupan una sola fila para liberar espacio para la animación.
+La imagen usa el mayor tamaño que cabe, con proporción 8:5 y sin recortes.
+El alto del visor se limita al de la imagen para eliminar las franjas oscuras
+superior e inferior. En ventanas de menor altura se reduce proporcionalmente
+para conservar visibles los controles y la información, sin deformar el mapa.
+No se oculta contenido para esconder el desplazamiento. No cambia el ancho
+del mapa de lluvia, los tamaños de letra ni la posición de sus controles.
+El recuadro de norte y escala se redujo de 128 a 100 px de ancho, con menos
+relleno y una flecha de 36 px de alto. Se conservan el texto de la escala,
+su cálculo geográfico y el tamaño de la imagen; no se escala la barra con CSS.
+
+ALCANCE
+El selector corresponde al panel interactivo. No altera los GIF, WebP ni las
+animaciones ya exportadas. estaciones_scan.html es un archivo anterior no
+enlazado desde el panel actual y no forma parte de esta traducción.
+
+COMPROBACIONES
+Pruebas funcionales con jsdom, sin navegador ni acceso a fuentes remotas:
+- Español inicial e inglés mediante selector o parámetro de dirección.
+- Conservación de evento, fotograma, valores, zoom y estado de reproducción.
+- Contador de imágenes, fechas, métricas y detalles de las estaciones.
+- 13 páginas de información: mismas fuentes y navegación entre idiomas.
+- Catálogo seleccionado e inventario completo: datos numéricos intactos.
+- Comparación SHA-256 de los archivos: 686 originales sin cambios, incluidos
+  los datos meteorológicos, la geografía, las 672 imágenes y los estilos base.
+
+Estas pruebas usan geometría simulada y no sustituyen la revisión visual.
+La apertura automática de archivos locales fue bloqueada por el navegador
+de pruebas. Falta revisar visualmente la copia en escritorio y móvil antes
+de publicarla: ambos idiomas, cuatro eventos, controles y ventanas de información.
+
+PUBLICACIÓN POSTERIOR
+Cuando apruebes la copia, carga su contenido en una nueva implementación de
+producción del proyecto existente geocapacity-ciclones en Cloudflare Pages.
+index.html debe quedar en la raíz de la carga. No crees otro proyecto.
+Conserva la carpeta web original como respaldo. No publiques los archivos
+de pruebas de la carpeta qa_bilingual_20261008 del espacio de trabajo de Codex.

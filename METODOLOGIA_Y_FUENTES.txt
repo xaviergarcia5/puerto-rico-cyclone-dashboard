@@ -1,0 +1,96 @@
+PANEL DE CICLONES Y LLUVIA DE PUERTO RICO
+Textos y fuentes vigentes: 8 de octubre de 2026
+Desarrollado por Xavier A. García-López
+
+Las animaciones utilizan imágenes del sensor Advanced Baseline Imager (ABI), a bordo del satélite GOES-16, perteneciente a la serie GOES-R, de la Administración Nacional Oceánica y Atmosférica de Estados Unidos (NOAA, por sus siglas en inglés). Las características, bandas y productos del sensor ABI pueden consultarse en el portal oficial de NOAA (https://www.ncei.noaa.gov/products/goes-terrestrial-weather-abi-glm). Los archivos científicos utilizados para elaborar las imágenes están disponibles en el archivo público de NOAA en Amazon Web Services (https://registry.opendata.aws/noaa-goes/).
+
+La ubicación, el viento máximo sostenido y la presión de los ciclones proceden de la base histórica del Centro Nacional de Huracanes de Estados Unidos (https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2025-091226.txt). Las categorías de huracán se determinan según la velocidad del viento mediante la escala Saffir-Simpson (https://www.nhc.noaa.gov/aboutsshws.php). Los colores de intensidad corresponden a la leyenda del visor de trayectorias históricas de NOAA (https://coast.noaa.gov/hurricanes/). El contorno de Puerto Rico, representado en verde oliva, procede de la cartografía oficial de la Oficina del Censo de Estados Unidos (https://www.census.gov/geographies/mapping-files/2024/geo/carto-boundary-file.html).
+
+Datos de lluvia
+
+El mapa utiliza estimaciones de lluvia por hora del producto Stage IV de NWS/NCEP (https://water.noaa.gov/about/precipitation-data-access). NWS/NCEP produce las estimaciones y el archivo de NSF NCAR (https://gdex.ucar.edu/datasets/d507005/) las conserva y distribuye. Cada archivo descargado contiene la cantidad de lluvia y el periodo horario correspondiente.
+
+En Puerto Rico, estas estimaciones combinan principalmente información del radar Doppler TJUA de Cayey, de la red NEXRAD, con mediciones de pluviómetros recibidas por el NWS desde distintas redes. Entre ellas está USGS, cuyos registros se utilizan para ajustar estimaciones de precipitación del NWS (https://www.usgs.gov/faqs/does-usgs-provide-precipitation-data). Los archivos Stage IV descargados contienen la lluvia estimada, pero no la lista exacta de estaciones incorporadas en cada hora.
+
+El mapa está dividido en celdas, porciones del territorio con una estimación propia de lluvia. Stage IV tiene una resolución nominal de aproximadamente 4 × 4 km. En la cuadrícula descargada para Puerto Rico, cada celda abarca aproximadamente 3.35 × 3.35 km sobre el terreno, por efecto de la proyección cartográfica. Para animar los colores, se suma la lluvia de cada hora dentro de cada celda, desde el inicio del periodo hasta la fecha y hora indicadas bajo el título.
+
+Los puntos corresponden a pluviómetros del USGS (https://waterdata.usgs.gov/). Sus cifras muestran la lluvia medida en cada estación desde el inicio del periodo, expresada en pulgadas y sumada con las lecturas disponibles. Al pulsar un punto se muestran la estación, ubicación, frecuencia, última lectura y enlace a la fuente. Al señalar un municipio se consulta la lluvia estimada en la celda situada bajo el cursor.
+
+La lluvia durante María
+
+María dañó gravemente el radar Doppler TJUA de Cayey. Mientras el radar estuvo fuera de servicio, el NWS utilizó Hydro-Estimator de NOAA/NESDIS (https://www.star.nesdis.noaa.gov/portfolio/detail_HydroEst.php) junto con mediciones de pluviómetros para estimar la lluvia, según el aviso del NWS sobre la interrupción del radar (https://www.weather.gov/media/serfc/PNSQPESJU2.pdf). Hydro-Estimator estima la lluvia a partir de imágenes infrarrojas de satélites geoestacionarios. En septiembre de 2017, GOES-13 era el satélite operativo GOES-East. GOES-16 también observaba a María y proporcionó las imágenes utilizadas en nuestra animación, como documenta NOAA (https://www.nesdis.noaa.gov/news/noaas-goes-16-provides-critical-data-hurricane-maria). Los archivos horarios de lluvia de Stage IV descargados de NCAR y utilizados en el mapa no identifican qué satélites ni qué pluviómetros se utilizaron para estimar la lluvia de cada hora.
+
+La lluvia acumulada estimada en los datos de Stage IV alcanza 61.4 pulgadas en un sector del este de Puerto Rico. La revisión confirmó que la suma de los valores horarios coincide con los acumulados diarios de esos datos, pero también identificó diferencias importantes respecto a la lluvia medida en las estaciones. Por ejemplo, del 18 de septiembre de 2017 a las 2:00 p. m. al 22 de septiembre a la 1:00 a. m., la estación Pueblito del Río, Las Piedras (https://waterdata.usgs.gov/monitoring-location/USGS-50999958/), registró 29.0 pulgadas, frente a las 46.8 pulgadas estimadas por Stage IV en la celda del mapa donde se encuentra la estación. Esta diferencia debe tenerse presente al interpretar las cantidades de lluvia representadas por los colores.
+
+Cómo se escogieron las estaciones
+
+Se buscaron registros de precipitación del USGS en distintas regiones de Puerto Rico. Se procuró mantener las mismas estaciones en los cuatro eventos. Cuando una estación carecía de registros para un evento, se evaluaron las estaciones cercanas con datos disponibles. Por ejemplo, Río Rosario, en Mayagüez, aparece durante Fiona. Lares se mantiene en los cuatro eventos como parte de la cobertura del interior oeste.
+
+El mapa incluye 12 estaciones del USGS en Irma, María y Ernesto, y 14 en Fiona. Cada punto muestra la lluvia registrada en su ubicación.
+
+El catálogo por evento (estaciones_campo.html) identifica las estaciones elegidas. Los demás registros recuperados están disponibles en el inventario completo (estaciones_usgs.html).
+
+Para consultar los datos de lluvia de una estación del USGS, abre su enlace en el catálogo por evento o en el inventario completo. En la página oficial de la estación, entra en Continuous data, selecciona Precipitation, total, inches (00045) y establece las fechas del evento. El periodo disponible para lluvia puede ser distinto del de otras mediciones de esa estación.
+
+Registros de las estaciones
+
+El acumulado de cada estación se actualiza al incorporar sus lecturas. Una X (×) indica que falta la lectura esperada para ese momento. Un triángulo indica que hay lecturas recientes, pero faltan registros anteriores. El círculo identifica un registro completo hasta la hora mostrada. Las cifras conservan la suma de las mediciones disponibles. Al pulsar una estación se puede consultar la última lectura y cuándo comenzaron a faltar datos.
+
+Disponibilidad en el oeste y el norte
+
+En el oeste, las series publicadas de lluvia de Río Rosario, Río Guanajibo, Río Grande de Añasco y Lago Daguey abarcan partes de 2018–2022. Las cuatro tienen registros durante Fiona. El mapa de ese evento incluye Río Rosario, en Mayagüez. Lares se mantiene en los cuatro eventos como parte de la cobertura del interior oeste.
+
+En Arecibo, Central Cambalache tiene un registro de precipitación del 1 de octubre de 2016 al 13 de diciembre de 2019 y aparece en los mapas de Irma y María. Para Fiona se muestra Río Camuy, junto al límite con Hatillo.
+
+La búsqueda incluyó estaciones de precipitación en la costa oeste, el suroeste y la costa norte, así como estaciones cercanas con registros para los periodos de cada evento. La disponibilidad se revisó específicamente para lluvia.
+
+Disponibilidad en Vieques y Culebra
+
+El registro público de lluvia de Vieques A1 Well (https://waterdata.usgs.gov/monitoring-location/USGS-180559065280501/) comienza el 27 de julio de 2021. Por eso aparece en los mapas de Fiona y Ernesto. El sitio también es un pozo de monitoreo, y el parámetro presentado aquí es precipitación.
+
+Para Irma y María no se recuperaron series de lluvia USGS dentro de Vieques o Culebra. En Culebra tampoco se recuperaron registros para Fiona y Ernesto. Río Icacos, en Naguabo, se incluyó en los cuatro eventos como parte de la cobertura de El Yunque.
+
+Otras estaciones y acceso a los datos
+
+Se recuperaron registros de precipitación de 40 estaciones del USGS para Irma, 40 para María, 80 para Fiona y 55 para Ernesto. El inventario completo (estaciones_usgs.html) permite consultar esos registros. Algunas estaciones aparecen en varios eventos. Además de las seleccionadas para el mapa, incluye Río Guanajibo y Lago Daguey durante Fiona, Arenas 1 Well en Guánica durante Fiona y Ernesto, y Bo. Guajataca en San Sebastián durante Ernesto.
+
+También pueden consultarse registros de otras redes, como Miradero, Mayagüez, de USDA NRCS/SCAN (https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=2232), con datos recuperados para Fiona y Ernesto, y Culebra Hill, de NOAA/NWS–COOP (https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:RQC00666343/detail), con acumulados diarios recuperados para Irma y María. Estos enlaces abren las páginas oficiales de las estaciones. Los puntos del panel corresponden exclusivamente a USGS.
+
+Imágenes de día y de noche
+
+
+Durante el día, las imágenes representan la luz solar reflejada por las nubes y la superficie. Durante la noche, muestran la energía infrarroja que estas emiten, lo que permite observar la nubosidad sin luz solar. Al amanecer y al atardecer, ambas representaciones se combinan gradualmente. Información de NOAA sobre imágenes visibles e infrarrojas (https://www.nesdis.noaa.gov/imagery/interactive-maps/visible-infrared-imagery).
+
+Frecuencia de las imágenes
+
+
+Las imágenes originales utilizadas para Irma y María se obtenían cada 15 minutos. En abril de 2019, NOAA modificó la programación del sensor para obtenerlas cada 10 minutos, frecuencia vigente durante Fiona y Ernesto. Para estas animaciones se selecciona una imagen aproximadamente cada 30 minutos. La fecha y la hora indicadas corresponden al inicio de cada observación, en horario de Puerto Rico. Información oficial sobre la frecuencia de observación (https://www.nesdis.noaa.gov/our-satellites/currently-flying/goes-east-west/abi-scan-mode-information-and-channel-summary).
+
+Trayectoria e información del ciclón
+
+
+Los puntos pequeños señalan las ubicaciones oficiales del ciclón a horas específicas. La línea muestra la trayectoria recorrida hasta el momento de la imagen. El movimiento entre los puntos oficiales es estimado. La ubicación del centro del ciclón se presenta como latitud y longitud en grados decimales, con N para norte y O para oeste. La categoría, el viento y la presión cambian cuando la animación alcanza la hora del siguiente registro histórico del NHC.
+
+Velocidad de traslación
+
+Indica cuántos kilómetros recorre el centro del ciclón por hora. Se calcula con la distancia y el tiempo entre dos posiciones consecutivas del Centro Nacional de Huracanes (NHC). Tanto la traslación como el viento se presentan en kilómetros por hora (km/h).
+
+La lluvia durante el evento
+
+Bajo el título aparecen las fechas y horas de inicio y cierre del acumulado del mapa. Los colores incorporan nuevos datos cada hora y las estaciones incorporan sus lecturas conforme están disponibles. Por ejemplo, cuando la animación muestra las 7:30 p. m., los colores pueden representar la lluvia acumulada hasta las 7:00 p. m. Al avanzar o retroceder la animación, ambos paneles muestran la información correspondiente a ese momento.
+
+Desarrollado por Xavier A. García-López
+
+El procesamiento se realizó con Python, utilizando NumPy para los cálculos, Pillow para las imágenes, ecCodes para leer los archivos meteorológicos y Shapely para las operaciones geográficas. Las imágenes de Irma, María y Fiona se obtuvieron mediante el catálogo de Google Earth Engine (https://developers.google.com/earth-engine/datasets/catalog/NOAA_GOES_16_MCMIPF), y las de Ernesto desde el archivo público de NOAA en Amazon Web Services (https://registry.opendata.aws/noaa-goes/). Ambos servicios distribuyen el producto de imágenes multicanal ABI de GOES-16. El catálogo de Earth Engine también abarca las fechas de Ernesto. El panel se desarrolló con HTML, CSS, JavaScript y D3.js para presentar los mapas, controles y animaciones, con apoyo de Codex de OpenAI en la programación.
+
+ARCHIVOS Y PROCEDENCIA
+Imágenes: NOAA GOES-16 ABI-L2-MCMIPF. Irma, María y Fiona descargadas mediante GEE. Ernesto descargado desde AWS. Ambos archivos cubren fechas de Ernesto. Los archivos del proyecto documentan la vía efectivamente utilizada.
+Lluvia estimada: archivos st4_pr de una hora, recuperados de katz_201709.tar, katz_202209.tar y katz_202408.tar en NCAR d507005. 83 archivos por evento, 332 en total.
+Cuadrícula nativa: 205 × 205 celdas, proyección polar estereográfica, Dx=Dy=4762 m codificados en la proyección. Resolución nominal del producto: aproximadamente 4 km. Separación calculada entre centros en Puerto Rico: alrededor de 3.35 km sobre el terreno. Este último valor procede de las coordenadas geográficas de la cuadrícula descargada.
+La lluvia horaria en kg/m² equivale a mm. Se divide entre 25.4 para obtener pulgadas. Se suman solamente los intervalos terminados. Los valores ausentes se conservan como ausentes.
+Originales Stage IV: Datos_lluvia/Revision_20261004/sources/nws_hourly_pr_original.
+Originales USGS: Datos_lluvia/Revision_USGS_exclusivo_20261005/sources.
+Selección de estaciones: Datos_lluvia/Revision_oeste_utuado_20261005/seleccion_usgs.csv.
+Otras redes, fuera del mapa: Datos_lluvia/Revision_costa_islas_20261004/sources contiene SCAN, y Datos_lluvia/Revision_redes_20261005/sources contiene NOAA GHCN-Daily, incluido Culebra Hill.
+El registro histórico del trabajo anterior se conserva en Datos_lluvia/Revision_fuentes_exportacion_20261007/respaldo_web y respaldo_plantillas.
+GIF y WebP vigentes: Products/Version 2/Animaciones_web_HD_20261007. Ambos contienen Imagen n de 168 y Reproducción 2×. Textos web en TXT y HTML dentro de ese paquete.

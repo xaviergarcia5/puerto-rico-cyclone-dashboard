@@ -1,0 +1,14 @@
+/* Style the language control and the requested map-button spacing only. */
+.language-bar{display:flex;justify-content:flex-end;align-items:center;gap:8px;min-height:40px;padding:6px 16px;color:#dce7f3;font-size:14px;line-height:1.4}
+.language-bar label{display:flex;align-items:center;gap:8px}
+.language-bar select{font:inherit;color:#f5f8fc;background:#13283f;border:1px solid #526a84;border-radius:6px;padding:5px 28px 5px 9px;min-height:32px;cursor:pointer}
+.language-bar select:focus-visible{outline:2px solid #8bbcff;outline-offset:3px}
+/* Keep the selector in the upper-right corner and retain the original header footprint. */
+.language-toolbar{min-height:0;padding:0;flex:0 0 auto}
+.language-toolbar select{width:100px;height:34px;min-height:34px;box-sizing:border-box;padding:4px 6px;font-size:13px;background:#10243af2}
+.language-toolbar .language-caption{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.rain-heading>.map-tools{min-width:114px;justify-content:flex-end}
+/* This region starts after the period text. Absolute controls consume no map/image space. */
+.rain-cartography{position:relative}
+/* 106px preserves the former selector/gap offset; the additional 38px stays unchanged. */
+.map-tools.rain-map-controls{position:absolute;top:6px;right:106px;transform:translateX(-38px);z-index:6}

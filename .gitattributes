@@ -1,0 +1,4 @@
+# Preserve the archived bytes; do not normalize line endings during checkout.
+* -text
+*.webp binary
+*.png binary

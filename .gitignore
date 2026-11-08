@@ -1,0 +1,12 @@
+# Local files, not application assets
+.DS_Store
+Thumbs.db
+Desktop.ini
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.log

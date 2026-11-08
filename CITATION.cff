@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Please cite the archived software version used in your work when a DOI is available."
+type: software
+title: "Historical Tropical Cyclone Dashboard for Puerto Rico"
+authors:
+  - family-names: "García López"
+    given-names: "Xavier A."
+    affiliation: "Department of Environmental Sciences, University of Puerto Rico, Río Piedras"
+    email: "xavier.garcia5@upr.edu"
+repository-code: "https://github.com/xaviergarcia5/puerto-rico-cyclone-dashboard"
+url: "https://geocapacity-ciclones.pages.dev/"
+keywords:
+  - Puerto Rico
+  - tropical cyclones
+  - GOES-16
+  - precipitation
+  - data visualization
