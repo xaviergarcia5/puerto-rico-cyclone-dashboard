@@ -4,7 +4,7 @@ Historical dashboard of tropical cyclones Irma and Maria (2017), Fiona (2022), a
 
 ## Open the dashboard
 
-Live application: https://geocapacity-ciclones.pages.dev/
+[Open the dashboard on GitHub Pages](https://xaviergarcia5.github.io/puerto-rico-cyclone-dashboard/)
 
 The dashboard was originally developed in **Spanish**, which remains the default.
 Use the language selector in the upper-right corner to switch to **English**.
@@ -42,8 +42,7 @@ The panel provides historical and educational context, not operational warnings.
 ## Author and development
 
 Xavier A. García López
-Department of Environmental Sciences, University of Puerto Rico, Río Piedras
-Contact: xavier.garcia5@upr.edu
+Contact: xavieralfredo.garcia01@gmail.com
 
 HTML, CSS and JavaScript support the application, with D3.js for map
 interaction and Python used in the upstream processing. Codex, an OpenAI
@@ -51,10 +50,10 @@ coding assistant, supported script development, review and integration.
 
 ## License and commercial use
 
-Original application code is provided under **PolyForm Noncommercial 1.0.0**.
+Original application and processing code is provided under **PolyForm Noncommercial 1.0.0**.
 Read `LICENSE` and `NOTICE`. Permitted noncommercial use and modification
-do not require a payment. The license also contains express permissions for
-the institutions and organizations named in its text.
+do not require a payment. The license also permits use by the categories of organizations
+it specifies.
 
 Commercial uses outside those permissions require prior written authorization
 under a separate paid license. See `COMMERCIAL_USE.md`.

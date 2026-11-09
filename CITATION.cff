@@ -5,10 +5,9 @@ title: "Historical Tropical Cyclone Dashboard for Puerto Rico"
 authors:
   - family-names: "García López"
     given-names: "Xavier A."
-    affiliation: "Department of Environmental Sciences, University of Puerto Rico, Río Piedras"
-    email: "xavier.garcia5@upr.edu"
+    email: "xavieralfredo.garcia01@gmail.com"
 repository-code: "https://github.com/xaviergarcia5/puerto-rico-cyclone-dashboard"
-url: "https://geocapacity-ciclones.pages.dev/"
+url: "https://xaviergarcia5.github.io/puerto-rico-cyclone-dashboard/"
 keywords:
   - Puerto Rico
   - tropical cyclones
