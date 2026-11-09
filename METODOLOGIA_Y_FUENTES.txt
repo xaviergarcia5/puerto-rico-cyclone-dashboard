@@ -1,6 +1,6 @@
 PUERTO RICO TROPICAL CYCLONE AND RAINFALL DASHBOARD
 Methods and sources
-Xavier A. García López
+Xavier A. García-López
 
 Satellite imagery and tracks
 

@@ -6,7 +6,7 @@ use, modification and redistribution subject to its terms, including its
 permissions for the categories of organizations specified in the license.
 
 Commercial uses outside the permissions granted by LICENSE require a
-separate written, paid commercial license from Xavier A. García López.
+separate written, paid commercial license from Xavier A. García-López.
 The permitted use, payment and other conditions must be agreed before
 that authorization is granted. This document does not itself grant a
 commercial license or establish a price.

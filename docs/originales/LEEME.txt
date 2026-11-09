@@ -1,5 +1,5 @@
 Historical Tropical Cyclone Dashboard for Puerto Rico
-Xavier A. García López
+Xavier A. García-López
 
 The project brings together GOES-16 imagery, NHC tracks and intensity,
 Stage IV precipitation estimates, and USGS rain-gauge readings for

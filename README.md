@@ -41,7 +41,7 @@ The panel provides historical and educational context, not operational warnings.
 
 ## Author and development
 
-Xavier A. García López
+Xavier A. García-López
 Contact: xavieralfredo.garcia01@gmail.com
 
 HTML, CSS and JavaScript support the application, with D3.js for map
@@ -65,10 +65,11 @@ The data and third-party code retain their own conditions. Read
 
 ## Citation and archival release
 
-Citation metadata are supplied in `CITATION.cff`. A Zenodo DOI has not yet
-been assigned. The DOI and release version will be added after the author
-completes publication. A specific release DOI will identify the version used
-in the article; the general DOI will identify the evolving software record.
+[![Zenodo project DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24069499.svg)](https://doi.org/10.5281/zenodo.24069499)
+
+The [project DOI](https://doi.org/10.5281/zenodo.24069499) identifies the dashboard across
+versions. Cite [version 1.0.0](https://doi.org/10.5281/zenodo.24069500) when referring to that
+specific archive. Citation metadata are supplied in `CITATION.cff`.
 
 `MANIFEST.sha256` records the packaged file checksums. Its entries exclude
 the manifest itself and will need updating when the archived files change.

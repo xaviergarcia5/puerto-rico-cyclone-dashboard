@@ -1,10 +1,19 @@
 cff-version: 1.2.0
-message: "Please cite the archived software version used in your work when a DOI is available."
+message: "Please cite the archived software version used in your work."
 type: software
+version: "1.0.0"
+doi: "10.5281/zenodo.24069500"
 license: "PolyForm-Noncommercial-1.0.0"
 title: "Interactive Dashboard of Satellite Imagery and Rainfall for Selected Tropical Cyclones Affecting Puerto Rico (2017–2024)"
+abstract: >-
+  Interactive dashboard of tropical cyclones affecting Puerto Rico, featuring Irma and
+  Maria (2017), Fiona (2022), and Ernesto (2024). NOAA GOES-16 imagery and National
+  Hurricane Center tracks are synchronized with a map of accumulated rainfall from
+  NWS/NCEP Stage IV, with USGS rain-gauge measurements shown at station locations. The
+  archive includes the application, which opens in Spanish and can be switched to
+  English, along with the processed data and the scripts used to prepare them.
 authors:
-  - family-names: "García López"
+  - family-names: "García-López"
     given-names: "Xavier A."
     email: "xavieralfredo.garcia01@gmail.com"
 repository-code: "https://github.com/xaviergarcia5/puerto-rico-cyclone-dashboard"
