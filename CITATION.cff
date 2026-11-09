@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite the archived software version used in your work when a DOI is available."
 type: software
 license: "PolyForm-Noncommercial-1.0.0"
-title: "Historical Tropical Cyclone Dashboard for Puerto Rico"
+title: "Interactive Dashboard of Satellite Imagery and Rainfall for Selected Tropical Cyclones Affecting Puerto Rico (2017–2024)"
 authors:
   - family-names: "García López"
     given-names: "Xavier A."
