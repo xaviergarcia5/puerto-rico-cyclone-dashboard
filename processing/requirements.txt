@@ -1,0 +1,11 @@
+boto3
+eccodes==2.49.0
+fsspec
+h5netcdf
+h5py
+numpy==2.4.6
+Pillow
+pyproj
+requests
+shapely==2.1.2
+xarray

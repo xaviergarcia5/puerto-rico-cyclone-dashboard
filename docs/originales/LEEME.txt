@@ -1,116 +1,19 @@
-HURACANES GOES-16
-Irma, María, Fiona y Ernesto
-Desarrollado por Xavier A. García-López
+Historical Tropical Cyclone Dashboard for Puerto Rico
+Xavier A. García López
 
-UBICACIÓN DE LA VERSIÓN ACTUAL
-Este archivo describe Products\Version 2.
-El panel completo está en Products\Version 2\web.
-Las imágenes PNG están en Products\Version 2\png_frames, separadas por ciclón.
-Las imágenes WebP utilizadas por el panel están en Products\Version 2\web\frames.
-Ernesto tiene su carpeta ernesto en ambas ubicaciones, con 168 imágenes en cada formato.
+The project brings together GOES-16 imagery, NHC tracks and intensity,
+Stage IV precipitation estimates, and USGS rain-gauge readings for
+Irma and Maria (2017), Fiona (2022), and Ernesto (2024).
 
-ABRIR EL PANEL
-Haz doble clic en Abrir_panel.cmd o en web\index.html.
-El panel funciona sin internet con los fotogramas ya guardados.
-Para publicarlo en WordPress, conserva y sube toda la carpeta web con sus subcarpetas.
+Open index.html at the repository root. Each storm has 168 frames selected
+at approximately 30-minute intervals. GOES acquisition timestamps are
+preserved in UTC and displayed in Puerto Rico time (UTC−4). NHC positions
+are interpolated between official records. Intensity is drawn from the last
+official record at the time shown. The hourly rainfall surface and the
+rain-gauge series update at their respective observation intervals.
 
-CONTROLES
-Selecciona el ciclón y usa reproducir, pausa, repetir, la barra de tiempo y el selector de velocidad. Puedes mostrar u ocultar la trayectoria. Con el foco fuera de un control, la barra espaciadora alterna reproducción y las flechas cambian de imagen.
-La fecha y la hora de la imagen se muestran en la hora de Puerto Rico.
-
-QUÉ REPRESENTA LA TRAYECTORIA
-Los puntos son posiciones oficiales del Centro Nacional de Huracanes de Estados Unidos. Si una imagen corresponde a una hora situada entre dos horas con posiciones oficiales, la ubicación del centro se calcula a partir de esas dos posiciones. La línea crece hasta la fecha y hora de la imagen.
-La clasificación como tormenta tropical o huracán, su categoría, la velocidad del viento y la presión corresponden al último registro oficial disponible para esa hora. Cuando el centro sale del mapa, la información situada debajo de la imagen indica que el centro está fuera del área mostrada.
-
-IMÁGENES Y FUENTES
-Las imágenes proceden de GOES-16, satélite de la Administración Nacional Oceánica y Atmosférica de Estados Unidos, NOAA por sus siglas en inglés.
-https://registry.opendata.aws/noaa-goes/
-El producto ABI-L2-MCMIPF contiene los canales 01, 02, 03, 07 y 13 usados en la composición. Es el mismo producto de la colección NOAA/GOES/16/MCMIPF utilizada para obtener las imágenes originales de Irma, María y Fiona mediante Google Earth Engine.
-https://developers.google.com/earth-engine/datasets/catalog/NOAA_GOES_16_MCMIPF
-
-Las posiciones y los vientos de los cuatro ciclones proceden de la base histórica HURDAT2 del Centro Nacional de Huracanes, conocido en inglés como NHC.
-https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2025-091226.txt
-Las categorías se determinan por el viento sostenido según la escala Saffir-Simpson.
-https://www.nhc.noaa.gov/aboutsshws.php
-Los datos originales y los extractos de cada ciclón están en Datos_NHC.
-
-PERIODOS MOSTRADOS EN HORA DE PUERTO RICO
-Irma del 5 de septiembre de 2017 a las 2 AM al 8 de septiembre a la 1.30 PM.
-María del 18 de septiembre de 2017 a las 2 PM al 22 de septiembre a la 1.30 AM.
-Fiona del 16 de septiembre de 2022 a las 8 PM al 20 de septiembre a las 7.30 AM.
-Ernesto del 12 de agosto de 2024 a las 2 PM al 16 de agosto a la 1.30 AM.
-Para las imágenes de cobertura completa utilizadas aquí, el satélite generaba una imagen cada 15 minutos en 2017 y cada 10 minutos en 2022 y 2024.
-Cada animación contiene 168 imágenes seleccionadas aproximadamente cada media hora. Los segundos reales de cada adquisición se conservan en los datos.
-Los archivos registran la hora universal coordinada, abreviada UTC. El panel la convierte a la hora de Puerto Rico y usa la hora original para sincronizar las trayectorias.
-
-PROCESAMIENTO DE LAS IMÁGENES
-Las imágenes procesadas de los cuatro ciclones se conservan en Products\Version 2\png_frames. El panel utiliza sus versiones WebP en Products\Version 2\web\frames.
-Ernesto usa la misma combinación de canales y los valores oficiales de las imágenes multicanal de NOAA.
-Durante el día se combinan canales visibles y del infrarrojo cercano. Durante la noche se combinan las temperaturas de brillo de los canales infrarrojos 07 y 13. La transición depende de la iluminación solar.
-El generador conserva esta combinación de canales en ejecuciones futuras.
-La proyección geográfica sirve para ubicar los píxeles en el mapa. El muestreo toma el valor del píxel más cercano en la imagen oficial.
-
-ARCHIVOS DEL GENERADOR
-Ejecuta py_GEE\Huracanes_GOES-R_GEE_ver2.py desde el entorno goes-geocolor.
-Conserva a su lado goes_classic.py, goes_subset.py, goes_tracks.py y la carpeta panel_web.
-Los nuevos datos se descargan del depósito público noaa-goes16 en Amazon Web Services. Los recortes contienen los valores oficiales de la región seleccionada. La carpeta provenance registra su procedencia y las comprobaciones de píxeles válidos.
-Los NetCDF temporales se guardan dentro del proyecto y se eliminan tras generar cada imagen.
-
-ACTUALIZAR LOS TEXTOS Y LAS TRAYECTORIAS
-Haz doble clic en Actualizar_panel.cmd. Reconstruye el panel con las imágenes registradas y los archivos oficiales ya guardados.
-
-GENERAR O REANUDAR ERNESTO
-Haz doble clic en Generar_Ernesto.cmd. Utiliza el entorno goes-geocolor instalado. Necesita internet para descargar los fotogramas pendientes y reutiliza los terminados con la combinación vigente.
-Para volver a generar imágenes existentes usa --overwrite. La opción --max-frames 3 permite una prueba breve. La opción --workers acepta entre 1 y 8 procesos. La opción --keep-netcdf conserva los recortes descargados.
-
-TECNOLOGÍAS
-Python, NumPy, Pillow, xarray, h5netcdf, h5py, fsspec, pyproj y boto3 para trabajar con los datos y las imágenes.
-Google Earth Engine para obtener las imágenes originales de Irma, María y Fiona.
-HTML, CSS y JavaScript para el panel interactivo.
-Apoyo en programación y revisión con Codex de OpenAI.
-
-ORGANIZACIÓN DEL PROYECTO
-Products\Version 2 contiene el panel, las imágenes procesadas y los registros de procedencia.
-py_GEE contiene el generador, sus módulos, el servidor local y las plantillas del panel.
-Datos_NHC conserva las fuentes oficiales de las trayectorias y la intensidad.
-Datos_geograficos conserva la cartografía oficial utilizada para Puerto Rico.
-Los registros de procedencia de Irma, María y Fiona conservan las rutas históricas de origen. Sus imágenes actuales están en Products\Version 2 y mantienen las mismas firmas SHA-256.
-
-CONTORNO DE PUERTO RICO
-La línea verde oliva identifica Puerto Rico, Vieques, Culebra, Mona y otras islas conservadas en la cartografía oficial del Censo de Estados Unidos de 2024, escala 1 a 500 000. Se muestra sobre las imágenes con una sombra fina y sin relleno. Comparte la extensión geográfica de las imágenes y permanece visible al ocultar la trayectoria.
-Los datos originales, la geometría en GeoJSON y su procedencia se guardan en Datos_geograficos\Puerto_Rico dentro del proyecto. El panel usa una copia local en web\puerto_rico.js y funciona sin internet.
-
-ORIENTACIÓN, ESCALA Y NOMBRE DE PUERTO RICO
-La esquina inferior izquierda contiene una flecha de norte geográfico y una escala gráfica en kilómetros. La escala horizontal se calcula a la latitud de la barra y se adapta al tamaño de la imagen.
-El nombre Puerto Rico se sitúa dentro de la isla principal. En pantallas pequeñas se abrevia como PR.
-
-COLORES DE INTENSIDAD
-La leyenda, los puntos, la trayectoria y el texto de intensidad usan los colores del visor Historical Hurricane Tracks de NOAA.
-Tormenta tropical verde, Categoría 1 amarilla, Categoría 2 naranja, Categoría 3 roja, Categoría 4 fucsia y Categoría 5 violeta.
-https://coast.noaa.gov/hurricanes/
-La leyenda muestra las seis clases que aparecen en los periodos representados.
-
-LLUVIA Y REVISIÓN DEL 4 DE OCTUBRE DE 2026
-La animación está a la izquierda y el mapa de lluvia arriba a la derecha, con
-columnas de igual altura. En escritorio de al menos 1280 x 720, todo el panel
-principal cabe sin scroll vertical. Las fuentes originales siguen completas.
-La velocidad de traslación y el viento máximo sostenido se muestran en km/h.
-El mapa utiliza 332 cuadrículas horarias oficiales NWS/NCEP Stage IV de PR,
-resolución nominal aproximada de 4 km. Los puntos muestran la red USGS y sus
-pulgadas acumuladas, conservando los periodos sin lecturas y los acumulados parciales. Los nombres de
-los municipios están dentro del mapa. Usa + y − para examinar zonas densas.
-El reloj de la imagen avanza cada media hora, pero el campo NWS solo se actualiza
-al terminar cada hora. La fecha y hora de cierre del acumulado aparecen bajo el título del mapa.
-María interrumpió el radar Doppler TJUA de Cayey. La suma horaria fue cotejada
-con los productos diarios y las estaciones. La nota de María explica las
-diferencias encontradas entre el mapa y las mediciones.
-Datos originales, scripts, controles y captura final: Datos_lluvia\Revision_20261004.
-Revisión adicional y captura actual: Datos_lluvia\Revision_legibilidad_20261004.
-Método completo: web\METODOLOGIA_Y_FUENTES.txt.
-
-REVISIÓN VIGENTE, 7 DE OCTUBRE DE 2026
-Textos y enlaces revisados en index.html y METODOLOGIA_Y_FUENTES.txt.
-GOES-16 se distingue de GOES-13 y de la serie GOES-R. Stage IV se distingue del archivo de NCAR.
-El tamaño de las celdas está explicado en Datos de lluvia. X (×) identifica una lectura faltante.
-Los archivos GIF/WebP con contador están en Products/Version 2/Animaciones_web_HD_20261007.
-Los textos para la página web se guardan en Textos_web, dentro de ese paquete.
+The olive outline is from U.S. Census Bureau cartography and remains visible
+when the track is hidden. The north arrow and kilometer scale are in the
+satellite panel. See processing/README.md for the imagery recipe, data sources
+and reproduction instructions. The in-app notes describe the interpretation
+and limitations of the rainfall estimates and station records.

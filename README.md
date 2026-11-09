@@ -6,9 +6,9 @@ Historical dashboard of tropical cyclones Irma and Maria (2017), Fiona (2022), a
 
 Live application: https://geocapacity-ciclones.pages.dev/
 
-The default language is **Spanish**. An English language selector is provided
-in the application. This publication preserves the existing application,
-its observations and its 672 WebP frames without changing their resolution.
+The dashboard was originally developed in **Spanish**, which remains the default.
+Use the language selector in the upper-right corner to switch to **English**.
+The two languages share the same observations and 672 WebP frames.
 
 For a local copy, keep the complete directory structure and open index.html.
 Alternatively, with Python installed, run `python -m http.server 8000`
@@ -22,13 +22,13 @@ from the repository folder and open http://localhost:8000/.
   by the existing application.
 - `METODOLOGIA_Y_FUENTES.txt`: methods, source links and interpretive limitations.
 - `LICENSE_D3.txt`: the retained license of the bundled D3.js library.
-- `docs/originales/`: historical preparation notes. Paths and deployment
-  statements in these older notes describe their original preparation context.
+- [Processing scripts and reproduction instructions](processing/README.md) in English.
+- `docs/originales/`: English summaries of the project and the bilingual interface.
 
-This package preserves the working application and its processed display
-assets. It is not a complete archive of the original GOES NetCDF and Stage IV
-GRIB downloads or of all upstream processing environments. The application
-and the original observation products are distinct research objects.
+The repository includes the released application, its display assets and the
+scripts for GOES-16, HURDAT2, Stage IV and USGS processing. The GOES NetCDF
+and Stage IV GRIB archives are available through the providers listed in the
+processing guide. The archived USGS inputs and HURDAT2 excerpts are included.
 
 ## Interpretation
 

@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&stateCd=72&parameterCd=00045&siteStatus=all&startDT=2017-09-05T05%3A00%3A00%2B00%3A00&endDT=2017-09-08T17%3A30%3A00%2B00%3A00",
+    "status": 200,
+    "file": "usgs_pr_irma.json",
+    "bytes": 1965219,
+    "sha256": "f8cf0411c34f1a21bc567002e6371ab9561488d7e51f5a53e562f307dc8c4ddd"
+  },
+  {
+    "url": "https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&stateCd=72&parameterCd=00045&siteStatus=all&startDT=2017-09-18T17%3A00%3A00%2B00%3A00&endDT=2017-09-22T05%3A30%3A00%2B00%3A00",
+    "status": 200,
+    "file": "usgs_pr_maria.json",
+    "bytes": 1635645,
+    "sha256": "e613f5a28d141e7e00c8548b499786636663f8a7b2c2b3c1960c2a92bf466aed"
+  },
+  {
+    "url": "https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&stateCd=72&parameterCd=00045&siteStatus=all&startDT=2022-09-16T23%3A00%3A00%2B00%3A00&endDT=2022-09-20T11%3A30%3A00%2B00%3A00",
+    "status": 200,
+    "file": "usgs_pr_fiona.json",
+    "bytes": 4147104,
+    "sha256": "b0f2ff41a1383b6883c344650bf43a0be3d51dd0895d2e84637aa4bb36633a91"
+  },
+  {
+    "url": "https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&stateCd=72&parameterCd=00045&siteStatus=all&startDT=2024-08-12T17%3A00%3A00%2B00%3A00&endDT=2024-08-16T05%3A30%3A00%2B00%3A00",
+    "status": 200,
+    "file": "usgs_pr_ernesto.json",
+    "bytes": 3970910,
+    "sha256": "756c18bb06f3093a7fe9b6cc29520f59f17bba18f9fb35708ee2f0c2ddf0ab9d"
+  }
+]
