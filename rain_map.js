@@ -2,7 +2,7 @@
   'use strict';
   const i18n=window.PanelI18n,t=i18n.t;
   const data={...window.RAIN_DATA,events:{...window.RAIN_DATA?.events,...window.NWS_RAIN_DATA?.events}},geo=window.RAIN_GEOGRAPHY,$=id=>document.getElementById(id);
-  if(!data||!geo||!window.d3){$('rain-period').textContent=t('No se cargaron los datos de lluvia.');return;}
+  if(!data||!geo||!window.d3){$('rain-period').textContent=t('Rainfall data could not be loaded.');return;}
   const ns='http://www.w3.org/2000/svg';
   const colors=['#ededed','#d3d3d3','#5d7fe5','#51d3ff','#51ffff','#51d326','#51ff51','#d2dd5e','#ffff26','#ffd37d','#ffa826','#ff7d26','#ff2626','#ffa8ff','#d37dd3','#a851a8','#7d517d'];
   const breaks=[0,.25,.5,1,2,3,4,5,6,8,10,12,14,16,18,20,25];
@@ -29,7 +29,7 @@
     boundaryLayer.append(node('path',{d:path(f),class:'municipality-border'}));
     const words=f.properties.name.split(' '),lines=words.length>1?[words.slice(0,Math.ceil(words.length/2)).join(' '),words.slice(Math.ceil(words.length/2)).join(' ')]:words;
     const compact=['Naranjito','Corozal','Hormigueros','Guaynabo','Bayamón','Cataño','Las Piedras','Humacao','Barceloneta'];
-    const text=node('text',{x,y,class:`municipality-name ${[...compact,'Toa Alta','Toa Baja','Dorado'].includes(f.properties.name)?'compact-town':''}`,'font-size':compact.includes(f.properties.name)?12:13,'data-municipio':f.properties.name});
+    const text=node('text',{x,y,class:`municipality-name ${[...compact,'Toa Alta','Toa Baja','Dorado'].includes(f.properties.name)?'compact-town':''}`,'font-size':compact.includes(f.properties.name)?12:13,'data-municipality':f.properties.name});
     if(f.properties.name==='Quebradillas'){text.setAttribute('transform',`rotate(-65 ${x} ${y})`);text.setAttribute('font-size','12');}
     text.dataset.baseTransform=text.getAttribute('transform')||'';
     for(let i=0;i<lines.length;i++)text.append(node('tspan',{x,dy:i===0?(lines.length===2?-6:0):13},lines[i]));
@@ -47,7 +47,7 @@
     else legend.append(node('rect',{x:barX+i*w,y:barY,width:w,height:22,fill:color,stroke:'#091626','stroke-width':.5}));
     legend.append(node('text',{x:barX+i*w,y:45,fill:'#eaf2ff','font-size':16,'text-anchor':'middle'},i===colors.length-1?'≥25':String(breaks[i])));
   });
-  const legendTitle=node('text',{x:500,y:65,fill:'#e0eafa','font-size':16,'text-anchor':'middle'},t('Lluvia acumulada (pulgadas)'));legend.append(legendTitle);
+  const legendTitle=node('text',{x:500,y:65,fill:'#e0eafa','font-size':16,'text-anchor':'middle'},t('Accumulated rainfall (inches)'));legend.append(legendTitle);
   let current=null,values=null,activeKey=null,locked=false,activeSlug=null,activeIndex=0,activeTip=null;const cache=new Map(),placements=new Map();
   const number=n=>Number(n).toFixed(2);
   const format={format:i18n.date};
@@ -75,7 +75,7 @@
     const point=e?new DOMPoint(e.clientX,e.clientY).matrixTransform(map.getScreenCTM().inverse()):null;
     const lon=point?(point.x-10)/435-67.32:f.properties.label[0];
     const lat=point?18.60-(point.y-8)/450:f.properties.label[1];
-    const v=sample(lon,lat);tip.replaceChildren();const strong=document.createElement('strong');strong.textContent=f.properties.name;tip.append(strong,document.createTextNode(v==null?t('Faltan datos para calcular la lluvia de este lugar'):t('Lluvia estimada: {value} pulgadas',{value:number(v)})));
+    const v=sample(lon,lat);tip.replaceChildren();const strong=document.createElement('strong');strong.textContent=f.properties.name;tip.append(strong,document.createTextNode(v==null?t('Rainfall data are missing for this location'):t('Estimated rainfall: {value} inches',{value:number(v)})));
     placeTip(e);
   }
   function gaugeTip(station,i,e,pin=false,refresh=false){
@@ -84,23 +84,23 @@
     locked=pin;const tip=$('rain-tooltip');tip.classList.toggle('locked',locked);tip.replaceChildren();
     if(pin){
       if(!refresh)document.dispatchEvent(new CustomEvent('rain-inspect'));
-      const close=document.createElement('button');close.textContent='✕';close.setAttribute('aria-label',t('Cerrar estación'));close.addEventListener('click',()=>{locked=false;hideTip();});tip.append(close);
+      const close=document.createElement('button');close.textContent='✕';close.setAttribute('aria-label',t('Close station'));close.addEventListener('click',()=>{locked=false;hideTip();});tip.append(close);
     }
     const title=document.createElement('strong');title.textContent=station.name;tip.append(title);
     const total=station.valuesIn[i];
-    const line=document.createElement('div');line.textContent=total==null?t('Sin lecturas hasta este momento'):t('Lluvia registrada: {value} pulgadas',{value:number(total)})+(station.partial[i]?t(' · acumulado incompleto'):'');tip.append(line);
+    const line=document.createElement('div');line.textContent=total==null?t('No readings available up to this time'):t('Recorded rainfall: {value} inches',{value:number(total)})+(station.partial[i]?t(' · incomplete accumulation'):'');tip.append(line);
     const meta=document.createElement('small');meta.textContent=`${station.agency||'USGS'} ${station.sourceId||station.id} · ${station.lat.toFixed(5)}, ${station.lon.toFixed(5)}`;tip.append(meta);
-    const region=document.createElement('small');region.textContent=t('Ubicación: {name}',{name:station.municipality});tip.append(region);
-    const frequency=document.createElement('small');frequency.textContent=t('Lecturas cada {minutes} minutos',{minutes:station.intervalSeconds/60});tip.append(frequency);
-    const last=document.createElement('small');last.textContent=station.lastUTC[i]?t('Última lectura: {date} (UTC−4)',{date:format.format(station.lastUTC[i])}):t('Sin lectura desde el inicio del acumulado');tip.append(last);
-    if(station.gapSinceUTC[i]&&!station.noEventData){const gap=document.createElement('small');gap.textContent=t('Faltan mediciones desde {date}',{date:format.format(station.gapSinceUTC[i])});tip.append(gap);}
-    if(station.states[i]==='resumed'){const resumed=document.createElement('small');resumed.textContent=t('La estación volvió a registrar. Faltan algunas lecturas anteriores.');tip.append(resumed);}
-    const quality=document.createElement('small');quality.textContent=station.qualityText||t(station.quality[i]==='A'?'Observaciones aprobadas por USGS':station.quality[i]==='P'?'Incluye observaciones provisionales USGS':'Estado de revisión no disponible');tip.append(quality);
-    const link=document.createElement('a');link.href=station.source;link.target='_blank';link.rel='noopener';link.textContent=t('Ficha de la estación ↗');tip.append(link);placeTip(e);
+    const region=document.createElement('small');region.textContent=t('Location: {name}',{name:station.municipality});tip.append(region);
+    const frequency=document.createElement('small');frequency.textContent=t('Readings every {minutes} minutes',{minutes:station.intervalSeconds/60});tip.append(frequency);
+    const last=document.createElement('small');last.textContent=station.lastUTC[i]?t('Last reading: {date} (UTC−4)',{date:format.format(station.lastUTC[i])}):t('No reading since the accumulation period began');tip.append(last);
+    if(station.gapSinceUTC[i]&&!station.noEventData){const gap=document.createElement('small');gap.textContent=t('Readings missing since {date}',{date:format.format(station.gapSinceUTC[i])});tip.append(gap);}
+    if(station.states[i]==='resumed'){const resumed=document.createElement('small');resumed.textContent=t('The station resumed recording. Some earlier readings are missing.');tip.append(resumed);}
+    const quality=document.createElement('small');quality.textContent=(station.qualityText?t(station.qualityText):null)||t(station.quality[i]==='A'?'USGS-approved observations':station.quality[i]==='P'?'Includes provisional USGS observations':'Review status unavailable');tip.append(quality);
+    const link=document.createElement('a');link.href=station.source;link.target='_blank';link.rel='noopener';link.textContent=t('Station page ↗');tip.append(link);placeTip(e);
   }
   function positions(slug,stations){
     const townNodes=[...labels.querySelectorAll('.municipality-name')];
-    function applyTownLayout(layout){for(const t of townNodes){const p=layout[t.dataset.municipio];t.setAttribute('transform',`translate(${p.dx} ${p.dy}) ${t.dataset.baseTransform}`);t.dataset.dx=String(p.dx);t.dataset.dy=String(p.dy);}}
+    function applyTownLayout(layout){for(const t of townNodes){const p=layout[t.dataset.municipality];t.setAttribute('transform',`translate(${p.dx} ${p.dy}) ${t.dataset.baseTransform}`);t.dataset.dx=String(p.dx);t.dataset.dy=String(p.dy);}}
     if(placements.has(slug)){const saved=placements.get(slug);applyTownLayout(saved.towns);return saved.stations;}
     for(const t of townNodes)t.setAttribute('transform',t.dataset.baseTransform);
     const inverse=map.getScreenCTM().inverse();
@@ -112,7 +112,7 @@
     }
     function ringContains(r,x,y){let inside=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const [xi,yi]=r[i],[xj,yj]=r[j];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)inside=!inside;}return inside;}
     function insideTown(f,x,y){const lon=(x-10)/435-67.32,lat=18.60-(y-8)/450,polys=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;return polys.some(p=>ringContains(p[0],lon,lat)&&!p.slice(1).some(r=>ringContains(r,lon,lat)));}
-    const towns=townNodes.map(t=>{const b=t.getBoundingClientRect(),a=new DOMPoint(b.left,b.top).matrixTransform(inverse),z=new DOMPoint(b.right,b.bottom).matrixTransform(inverse),f=geo.features.find(f=>f.properties.name===t.dataset.municipio);return{name:t.dataset.municipio,f,anchor:project(...f.properties.label),x:a.x-.75,y:a.y-.75,w:z.x-a.x+1.5,h:z.y-a.y+1.5};});
+    const towns=townNodes.map(t=>{const b=t.getBoundingClientRect(),a=new DOMPoint(b.left,b.top).matrixTransform(inverse),z=new DOMPoint(b.right,b.bottom).matrixTransform(inverse),f=geo.features.find(f=>f.properties.name===t.dataset.municipality);return{name:t.dataset.municipality,f,anchor:project(...f.properties.label),x:a.x-.75,y:a.y-.75,w:z.x-a.x+1.5,h:z.y-a.y+1.5};});
     const dots=stations.map(s=>{const [x,y]=project(s.lon,s.lat);return{x:x-7,y:y-7,w:14,h:14,id:s.id};});
     const fixed=[...dots,{x:928,y:35,w:60,h:80}],answer={},lines=[];
     // Preserve true station coordinates. Relocate town names inside their own polygons.
@@ -201,7 +201,7 @@
     for(const station of stations){
       const [sx,sy]=project(station.lon,station.lat),p=layout[station.id],sum=station.valuesIn[i],state=station.states[i],incomplete=station.partial[i];
       missing+=state==='missing'?1:0;partial+=incomplete?1:0;
-      const g=node('g',{class:`gauge-point ${incomplete?'partial':''} ${state==='missing'?'missing':''}`,tabindex:0,role:'button','aria-label':`${station.name}, ${sum==null?t('sin lectura'):t('{value} pulgadas',{value:number(sum)})}${incomplete?t(', acumulado parcial'):''}`,'data-station':station.id});
+      const g=node('g',{class:`gauge-point ${incomplete?'partial':''} ${state==='missing'?'missing':''}`,tabindex:0,role:'button','aria-label':`${station.name}, ${sum==null?t('no reading'):t('{value} inches',{value:number(sum)})}${incomplete?t(', partial accumulation'):''}`,'data-station':station.id});
       if(sum!=null){
         const ex=Math.max(p.x,Math.min(p.x+p.w,sx)),ey=Math.max(p.y,Math.min(p.y+p.h,sy));
         const distance=Math.hypot(ex-sx,ey-sy),factor=distance?Math.min(1,7/distance):0;
@@ -219,7 +219,7 @@
       fragment.append(g);
     }
     stationLayer.replaceChildren(fragment);
-    $('station-status').textContent=t('{total} estaciones del USGS · {missing} con lecturas faltantes.',{total:stations.length,missing});
+    $('station-status').textContent=t('{total} USGS stations · {missing} with missing readings.',{total:stations.length,missing});
   }
   function contourPaths(){
     if(current.grid){
@@ -239,7 +239,7 @@
     return d3.contours().size([nx,ny]).thresholds(breaks.slice(1))(grid).map((g,i)=>({d:contourPath(g),fill:colors[i+1]}));
   }
   window.updateRain=(slug,utc,eventName)=>{
-    const event=data.events[slug];if(!event){$('rain-period').textContent=t('Sin datos de lluvia para este evento.');rainLayer.replaceChildren();stationLayer.replaceChildren();return;}
+    const event=data.events[slug];if(!event){$('rain-period').textContent=t('No rainfall data for this event.');rainLayer.replaceChildren();stationLayer.replaceChildren();return;}
     const now=Date.parse(utc);
     let i=event.endsUTC.findLastIndex(t=>Date.parse(t)<=now);i=Math.max(0,i);
     const key=`${slug}:${i}`;current=event;values=event.accumulatedIn[i];activeSlug=slug;activeIndex=i;
@@ -252,12 +252,12 @@
     }
     const cutoff=event.mapCutoffUTC?.[i]||event.endsUTC[i];
     $('rain-period').replaceChildren();
-    for(const text of [t('Desde {date}',{date:format.format(event.startUTC)}),t('Hasta {date} · hora de Puerto Rico (UTC−4)',{date:format.format(cutoff)})]){const line=document.createElement('span');line.textContent=text;$('rain-period').append(line);}
-    svg.setAttribute('aria-label',t('Lluvia acumulada estimada de {event} hasta {date}, con registros de estaciones USGS.',{event:eventName,date:format.format(cutoff)}));
+    for(const text of [t('From {date}',{date:format.format(event.startUTC)}),t('Through {date} · Puerto Rico time (UTC−4)',{date:format.format(cutoff)})]){const line=document.createElement('span');line.textContent=text;$('rain-period').append(line);}
+    svg.setAttribute('aria-label',t('Estimated accumulated rainfall for {event} through {date}, with USGS station records.',{event:eventName,date:format.format(cutoff)}));
     svg.dataset.event=slug;svg.dataset.cutoff=cutoff;svg.dataset.index=String(i);svg.dataset.source=event.sourceKind||'IMERG';
   };
   document.addEventListener('languagechange',()=>{
-    legendTitle.textContent=t('Lluvia acumulada (pulgadas)');
+    legendTitle.textContent=t('Accumulated rainfall (inches)');
     if(activeSlug)drawStations(activeSlug,activeIndex);
     if(!$('rain-tooltip').hidden&&activeTip){
       const a=activeTip;

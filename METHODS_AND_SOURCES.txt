@@ -113,8 +113,8 @@ returned no precipitation series within Vieques or Culebra for Irma or
 Maria, and none within Culebra for Fiona or Ernesto. Río Icacos in Naguabo
 is shown in all four events as part of El Yunque coverage.
 
-The event catalog (estaciones_campo.html) identifies selected stations.
-The full inventory (estaciones_usgs.html) contains 40 stations for Irma,
+The event catalog (selected_usgs_stations.html) identifies selected stations.
+The full inventory (usgs_station_inventory.html) contains 40 stations for Irma,
 40 for Maria, 80 for Fiona and 55 for Ernesto. It includes additional
 stations such as Río Guanajibo and Lago Daguey during Fiona, Arenas 1 Well
 in Guánica during Fiona and Ernesto, and Bo. Guajataca in San Sebastián

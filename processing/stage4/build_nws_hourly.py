@@ -21,7 +21,7 @@ import eccodes as ec
 from shapely.geometry import shape,Point
 from shapely.ops import unary_union
 events=json.loads((DASHBOARD/'events.js').read_text(encoding='utf-8').split('=',1)[1].strip().rstrip(';'))['events']
-geo=json.loads((DASHBOARD/'municipios.js').read_text(encoding='utf-8').split('=',1)[1].strip().rstrip(';'))
+geo=json.loads((DASHBOARD/'municipalities.js').read_text(encoding='utf-8').split('=',1)[1].strip().rstrip(';'))
 land=unary_union([shape(f['geometry']) for f in geo['features']])
 parse=lambda s:datetime.fromisoformat(s.replace('Z','+00:00'))
 iso=lambda t:t.isoformat().replace('+00:00','Z')

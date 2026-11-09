@@ -1,8 +1,7 @@
 cff-version: 1.2.0
 message: "Please cite the archived software version used in your work."
 type: software
-version: "1.0.0"
-doi: "10.5281/zenodo.24069500"
+version: "1.0.1"
 license: "PolyForm-Noncommercial-1.0.0"
 title: "Interactive Dashboard of Satellite Imagery and Rainfall for Selected Tropical Cyclones Affecting Puerto Rico (2017–2024)"
 abstract: >-

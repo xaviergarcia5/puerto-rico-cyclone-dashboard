@@ -22,7 +22,7 @@ These materials retain their source-specific conditions. No exclusive
 copyright or commercial-use restriction is asserted here over the original
 government observations, geographical facts, or public-domain records.
 Technical source details and limitations are provided in
-METODOLOGIA_Y_FUENTES.txt and in the bilingual information windows.
+METHODS_AND_SOURCES.txt and in the bilingual information windows.
 
 The Stage IV fields and the separately displayed USGS observations must not
 automatically be treated as independent measurements. The downloaded Stage IV

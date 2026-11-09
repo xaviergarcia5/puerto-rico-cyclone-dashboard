@@ -2,7 +2,7 @@
   "use strict";
   const i18n=window.PanelI18n,t=i18n.t;
   const data = window.HURRICANE_DATA;
-  if (!data?.events) { document.body.textContent = t("No se encontraron los datos del panel."); return; }
+  if (!data?.events) { document.body.textContent = t("The panel data could not be found."); return; }
   const $ = id => document.getElementById(id);
   const selector=$("storm-selector"), image=$("frame-image"), loading=$("loading"), slider=$("scrubber");
   const svg=$("track-overlay"), pathLayer=$("track-path"), pointLayer=$("official-points");
@@ -15,7 +15,7 @@
   const inside=r=>r.lon>=west&&r.lon<=east&&r.lat>=south&&r.lat<=north;
   const ns="http://www.w3.org/2000/svg";
   const stamp=i18n.date;
-  let loadingMessage='Cargando imagen…';
+  let loadingMessage='Loading image…';
   function showLoading(message){loadingMessage=message;loading.textContent=t(message);loading.classList.remove('hidden');}
   function shape(tag,attributes){const el=document.createElementNS(ns,tag);Object.entries(attributes).forEach(([key,value])=>el.setAttribute(key,String(value)));return el;}
   function drawPuertoRico(){
@@ -62,9 +62,9 @@
     const number=new Intl.NumberFormat(i18n.language==='en'?'en-US':'es-PR',{maximumFractionDigits:2});
     scale.style.width=`${pixels}px`;
     scale.setAttribute("viewBox",`0 0 ${pixels} 30`);
-    scale.setAttribute("aria-label",t('Escala de {distance} kilómetros, válida a {latitude} grados norte',{distance:number.format(distanceKm),latitude:number.format(latitude)}));
+    scale.setAttribute("aria-label",t('Scale of {distance} kilometers, valid at {latitude} degrees north',{distance:number.format(distanceKm),latitude:number.format(latitude)}));
     const title=shape("title",{});
-    title.textContent=t('Escala horizontal a {latitude}° N',{latitude:number.format(latitude)});
+    title.textContent=t('Horizontal scale at {latitude}° N',{latitude:number.format(latitude)});
     const labels=[[0,0,"start"],[pixels,distanceKm,"end"]].map(([x,value,anchor],index)=>{
       const text=shape("text",{x,y:28,"text-anchor":anchor});
       text.textContent=`${number.format(value)}${index===1?" km":""}`;
@@ -107,19 +107,19 @@
     pathLayer.appendChild(pathFragment);pointLayer.appendChild(pointsFragment);
     $("storm-info").style.setProperty("--storm-color",color(current));
     if(!current){
-      $("storm-intensity").textContent=t("Sin posición válida para esta hora");
-      $("wind-value").textContent=t("No disponible");$("pressure-value").textContent=t("No disponible");
-      $("position-label").textContent=t("Posición del centro del ciclón");$("position-info").textContent=t("Sin registro");$("position-info").removeAttribute("title");
+      $("storm-intensity").textContent=t("No valid position for this time");
+      $("wind-value").textContent=t("Unavailable");$("pressure-value").textContent=t("Unavailable");
+      $("position-label").textContent=t("Cyclone center position");$("position-info").textContent=t("No record");$("position-info").removeAttribute("title");
 
       return;
     }
     $("storm-intensity").textContent=i18n.intensity(current);
-    $("wind-value").textContent=current.windKt==null?t("No disponible"):`${Math.round(current.windKt*1.852)} km/h`;
-    $("pressure-value").textContent=current.pressureHpa==null?t("No disponible"):`${current.pressureHpa} hPa`;
+    $("wind-value").textContent=current.windKt==null?t("Unavailable"):`${Math.round(current.windKt*1.852)} km/h`;
+    $("pressure-value").textContent=current.pressureHpa==null?t("Unavailable"):`${current.pressureHpa} hPa`;
     const coordinates=`${Math.abs(current.lat).toFixed(2)}° ${current.lat>=0?"N":"S"}, ${Math.abs(current.lon).toFixed(2)}° ${current.lon>=0?"E":i18n.language==='en'?"W":"O"}`;
-    $("position-label").textContent=t(current.interpolated?"Posición estimada del centro del ciclón":"Posición del centro del ciclón");
+    $("position-label").textContent=t(current.interpolated?"Estimated cyclone center position":"Cyclone center position");
     $("position-info").textContent=coordinates;
-    if(current.outside) $("position-info").title=t("Centro del ciclón fuera del área de la imagen");
+    if(current.outside) $("position-info").title=t("Cyclone center outside the image area");
     else $("position-info").removeAttribute("title");
 
   }
@@ -129,7 +129,7 @@
     if(j<0)j=track.length-1;
     const a=track[j-1],b=track[j],hours=a&&b?(Date.parse(b.utc)-Date.parse(a.utc))/3600000:0;
     if(!a||!b||hours<=0||hours>9||now<Date.parse(track[0].utc)||now>Date.parse(track.at(-1).utc)){
-      $("translation-value").textContent=t("No disponible");$("translation-value").removeAttribute('title');return;
+      $("translation-value").textContent=t("Unavailable");$("translation-value").removeAttribute('title');return;
     }
     const rad=v=>v*Math.PI/180,dl=rad(b.lat-a.lat),dn=rad(b.lon-a.lon);
     const h=Math.sin(dl/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dn/2)**2;
@@ -138,8 +138,8 @@
     $("translation-value").title=`${stamp(a.utc)} → ${stamp(b.utc)} · ${km.toFixed(1)} km`;
   }
   function updateButton(){
-    $("play-icon").dataset.playing=String(state.playing);$("play-text").textContent=t(state.playing?"PAUSA":"REPRODUCIR");
-    $("play-button").setAttribute("aria-label",t(state.playing?"Pausar":"Reproducir"));
+    $("play-icon").dataset.playing=String(state.playing);$("play-text").textContent=t(state.playing?"PAUSE":"PLAY");
+    $("play-button").setAttribute("aria-label",t(state.playing?"Pause":"Play"));
   }
   function stopTimer(){if(state.timer!==null){clearTimeout(state.timer);state.timer=null;}}
   function pause(){state.playing=false;stopTimer();updateButton();}
@@ -149,7 +149,7 @@
   function renderFrameText(frame){
     image.alt=`${state.event.name}, ${stamp(frame.utc)}, ${i18n.intensity(frame.trackState)}`;
     $("date-time").textContent=stamp(frame.utc);
-    $("frame-count").textContent=t('Imagen {current} de {total}',{current:state.index+1,total:state.event.frames.length});
+    $("frame-count").textContent=t('Image {current} of {total}',{current:state.index+1,total:state.event.frames.length});
     $("mode-badge").textContent=t(frame.mode);drawTrack(frame);updateTranslation(frame);
     window.updateRain?.(state.slug,frame.utc,state.event.name);
   }
@@ -157,7 +157,7 @@
     if(!state.event?.frames.length)return;
     stopTimer();const request=++state.request;const event=state.event;
     index=Math.max(0,Math.min(event.frames.length-1,index));const frame=event.frames[index];
-    showLoading('Cargando imagen…');
+    showLoading('Loading image…');
     const ready=preload(frame.src);
     function commit(){
       if(request!==state.request)return;
@@ -168,7 +168,7 @@
     if(ready.complete&&ready.naturalWidth)commit();
     else{
       ready.onload=commit;
-      ready.onerror=()=>{if(request!==state.request)return;pause();showLoading('No fue posible cargar este fotograma. Mueve la barra para continuar.');};
+      ready.onerror=()=>{if(request!==state.request)return;pause();showLoading('This image could not be loaded. Move the slider to continue.');};
       if(ready.complete&&!ready.naturalWidth)ready.onerror();
     }
   }
@@ -184,7 +184,7 @@
     const button=document.createElement("button");button.className="storm-button";button.type="button";button.dataset.slug=slug;
     const year=event.frames[0]?.utc?.slice(0,4)||event.nhcId?.slice(-4)||"";
     button.textContent=`${event.name.toLocaleUpperCase("es-PR")} ${year}`.trim();button.setAttribute("aria-pressed","false");
-    if(!event.frames.length){button.disabled=true;button.textContent+=t(" · pendiente");button.title=t("Fotogramas pendientes de generación");}
+    if(!event.frames.length){button.disabled=true;button.textContent+=t(" · pending");button.title=t("Images have not yet been generated");}
     button.addEventListener("click",()=>selectStorm(slug));selector.appendChild(button);
   });
   $("play-button").addEventListener("click",()=>state.playing?pause():play());
@@ -226,5 +226,5 @@
   function fitScene(){const w=Math.min(viewer.clientWidth,viewer.clientHeight*width/height);scene.style.width=`${w}px`;scene.style.height=`${w*height/width}px`;}
   new ResizeObserver(fitScene).observe(viewer);fitScene();
   const first=data.events.irma?.frames.length?"irma":Object.keys(data.events).find(slug=>data.events[slug].frames.length);
-  if(first)selectStorm(first);else showLoading("Todavía no hay fotogramas generados.");
+  if(first)selectStorm(first);else showLoading("No images have been generated yet.");
 })();

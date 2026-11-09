@@ -20,10 +20,10 @@ from the repository folder and open http://localhost:8000/.
 - `frames/`: 168 imagery frames for each of the four events.
 - Processed precipitation, station, track and geographical assets required
   by the existing application.
-- `METODOLOGIA_Y_FUENTES.txt`: methods, source links and interpretive limitations.
+- `METHODS_AND_SOURCES.txt`: methods, source links and interpretive limitations.
 - `LICENSE_D3.txt`: the retained license of the bundled D3.js library.
 - [Processing scripts and reproduction instructions](processing/README.md) in English.
-- `docs/originales/`: English summaries of the project and the bilingual interface.
+- `docs/`: English summaries of the project and the bilingual interface.
 
 The repository includes the released application, its display assets and the
 scripts for GOES-16, HURDAT2, Stage IV and USGS processing. The GOES NetCDF

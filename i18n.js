@@ -3,6 +3,14 @@
   // Spanish is the default on every fresh visit. No browser-language detection.
   let language = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'es';
   const strings = {
+    "Ciclón extratropical": "Extratropical cyclone",
+    "Tormenta subtropical": "Subtropical storm",
+    "Depresión subtropical": "Subtropical depression",
+    "Baja presión": "Low pressure",
+    "Perturbación": "Disturbance",
+    "Onda tropical": "Tropical wave",
+    "El archivo consultado no devolvió lecturas para este evento.": "The archive returned no readings for this event.",
+    "Datos horarios de USDA NRCS/SCAN. Control automático V (válido).": "Hourly USDA NRCS/SCAN data. Automated quality flag V (valid).",
     'Idioma':'Language', 'Seleccionar idioma':'Select language',
     'Huracanes y lluvia acumulada · Puerto Rico':'Hurricanes and accumulated rainfall · Puerto Rico',
     'Irma, María, Fiona y Ernesto: imágenes GOES, trayectoria NHC, lluvia NWS/NCEP y registros de precipitación de estaciones USGS.':'Irma, María, Fiona and Ernesto: GOES imagery, NHC tracks, NWS/NCEP rainfall and USGS rain-gauge records.',
@@ -71,10 +79,11 @@
   };
   Object.assign(strings,window.PANEL_EXTRA_STRINGS||{});
   for (let n=1;n<=5;n++) strings[`Categoría ${n}`]=`Category ${n}`;
+  const spanish=Object.fromEntries(Object.entries(strings).map(([es,en])=>[en,es]));
   const entries=[];
   const clean=s=>s.replace(/\s+/g,' ').trim();
   const t=(key,values={})=>{
-    const translated=language==='en'?(strings[key]??key):key;
+    const translated=language==='en'?(strings[key]??key):(spanish[key]??key);
     return translated.replace(/\{(\w+)\}/g,(_,name)=>values[name]??`{${name}}`);
   };
   const dateFormats=Object.fromEntries([['es','es-PR'],['en','en-US']].map(([lang,locale])=>[lang,new Intl.DateTimeFormat(locale,{
@@ -82,9 +91,8 @@
   })]));
   const date=value=>dateFormats[language].format(new Date(value));
   const intensity=record=>{
-    let label=record?.label?.replace('categoría','Categoría').replace(/\s*·\s*/g,' ')||t('intensidad no disponible');
-    if(language==='en') label=label.replace('Huracán','Hurricane').replace('Categoría','Category').replace('Tormenta tropical','Tropical storm').replace('Depresión tropical','Tropical depression');
-    return label;
+    if(!record?.label)return t('intensity unavailable');
+    return record.label.split(/\s*·\s*/).map(label=>t(label)).join(' ');
   };
   function capture(root){
     const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
@@ -102,7 +110,7 @@
   function updateLinks(root=document){
     for(const a of root.querySelectorAll('a[href]')){
       const raw=a.getAttribute('href');
-      if(!/^(?:index|estaciones_campo|estaciones_usgs|estaciones_scan)\.html(?:[?#]|$)/.test(raw))continue;
+      if(!/^(?:index|selected_usgs_stations|usgs_station_inventory|scan_rain_gauges)\.html(?:[?#]|$)/.test(raw))continue;
       const url=new URL(raw,location.href);
       if(language==='en')url.searchParams.set('lang','en');else url.searchParams.delete('lang');
       a.setAttribute('href',url.pathname.split('/').pop()+url.search+url.hash);

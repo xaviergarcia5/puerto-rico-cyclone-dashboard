@@ -73,7 +73,7 @@ python processing/stage4/download_stage4_archives.py ../cyclone-build/stage4-inp
 python processing/stage4/build_nws_hourly.py . ../cyclone-build/stage4-input ../cyclone-build/stage4
 ```
 
-The builder reads `events.js` and `municipios.js` from the dashboard. It
+The builder reads `events.js` and `municipalities.js` from the dashboard. It
 decodes the 332 one-hour Puerto Rico GRIB files, accumulates the native grid
 values in inches, retains missing cells, and writes `nws_data.js` with a
 coverage audit and source inventory. Each event has 83 hourly grids.
@@ -92,7 +92,7 @@ availability and proximity to reproduce the displayed subset.
 
 ```sh
 python processing/usgs/build_station_network.py . processing/usgs/source ../cyclone-build/usgs
-node processing/usgs/select_display_stations.cjs ../cyclone-build/usgs/gauge_data.js municipios.js ../cyclone-build/usgs-display
+node processing/usgs/select_display_stations.cjs ../cyclone-build/usgs/gauge_data.js municipalities.js ../cyclone-build/usgs-display
 ```
 
 The outputs are `gauge_data.js`, `field_gauge_data.js`, and audit files
